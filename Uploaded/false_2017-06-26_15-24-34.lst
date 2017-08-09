@@ -1,0 +1,136 @@
+Marchecko KV-51 v11 listing
+0 : .386
+ 
+Error near line 0:unexpected lexem ".386
+" on line 0 on position 0
+
+1 : mcrs MACRO
+ 
+2 : 	And parm , dd
+ 
+Error near line 2:"register/memory" is required at the next position of lexem on line 2 on position 0
+"register/memory/const/variable" is missed after lexem on line 2 on position 0
+"identifier" is required at the previous position of lexem on line 2 on position 3
+"ds" is required before this row by lexem on line 2 on position 3
+
+3 : ENDM
+ 
+4 : data segment
+ 
+5 : str db "big ukrainian boss's string"
+ 
+6 : hex dw 3Eh
+ 
+7 : bina dd 01101101b
+ 
+8 : deca dd 21
+ 
+9 : data ends
+ 
+10 : cod1 segment
+ 
+11 : assume cs:cod1 , ds:data
+ 
+12 : Neg bh
+ 
+13 : Neg ebx
+ 
+14 : Dec deca
+ 
+Error near line 14:"register/memory" is required at the next position of lexem on line 14 on position 0
+
+15 : Adc bh ,  ptr [ebx+6]
+ 
+16 : Adc ecx , [ebx+6]
+ 
+17 : Adc bh , bina
+ 
+18 : Adc ecx , hexa
+ 
+Error near line 18:"register/memory/const/variable" is missed after lexem on line 18 on position 0
+
+19 : Cmp es:[ebx+6] , ah
+ 
+20 : Cmp [ebx+6] , eax
+ 
+21 : Cmp deca , ah
+ 
+22 : Cmp bina , eax
+ 
+23 : Or eax , bh
+ 
+Error near line 23:Operand types must match on line 23
+
+24 : Or bh , bl
+ 
+25 : Or al , edx
+ 
+Error near line 25:Operand types must match on line 25
+
+26 : Or ecx , edx
+ 
+27 : Mov eax , bl
+ 
+Error near line 27:Operand types must match on line 27
+
+28 : Mov eax , bx
+ 
+Error near line 28:Operand types must match on line 28
+
+29 : Mov eax , ebx
+ 
+30 : Mov al , bl
+ 
+31 : Mov al , bx
+ 
+Error near line 31:Operand types must match on line 31
+
+32 : Mov al , ebx
+ 
+Error near line 32:Operand types must match on line 32
+
+33 : met1:
+ 
+34 : ;And [bx+si] , 8Ah
+ 
+Error near line 34:unexpected lexem ";And" on line 34 on position 0
+
+35 : And [bx+bp+di+5] , 8AF2h
+ 
+Error near line 35:"register/memory" is required at the next position of lexem on line 35 on position 0
+unexpected lexem "[bx+bp+di+5]" on line 35 on position 1
+
+36 : And [ebx+6] , 8AF22E4Bh
+ 
+37 : And hexa , bh
+ 
+Error near line 37:"register/memory" is required at the next position of lexem on line 37 on position 0
+
+38 : And bina , bx
+ 
+Error near line 38:"register/memory" is required at the next position of lexem on line 38 on position 0
+
+39 : And deca , ebx
+ 
+Error near line 39:"register/memory" is required at the next position of lexem on line 39 on position 0
+
+40 : Jc met1
+ 
+41 : Jmp met2
+ 
+Error near line 41:"met name" is required at the next position of lexem on line 41 on position 0
+
+42 : cod1 ends
+ 
+43 : cod2 segment
+ 
+44 : assume cs:cod2 , ds:data
+ 
+45 : met2:
+ 
+Error near line 45:Can not find in code "met name" that is required by lexem on line 45 on position 0
+
+46 : cod2 ends
+ 
+47 : END 
+Find 17 errors

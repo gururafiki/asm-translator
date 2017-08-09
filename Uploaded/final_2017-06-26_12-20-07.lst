@@ -1,0 +1,101 @@
+Marchecko KV-51 v11 listing
+0 : .386
+ 
+Error near line 0:unexpected lexem ".386
+" on line 0 on position 0
+
+1 : mcrs MACRO 
+2 : 	And eax , ebx
+ 
+3 : ENDM
+ 
+4 : mcr MACRO parm
+ 
+5 : 	And eax , ebx
+ 
+6 : ENDM
+ 
+7 : data segment
+ 
+8 : 	stri db "big ukrainian boss's string"
+ 
+9 : 	hexa dw 3Eh
+ 
+10 : 	bina dd 01101101b
+ 
+11 : 	deca dd 21
+ 
+12 : data ends
+ 
+13 : cod1 segment
+ 
+14 : assume cs:cod1 , ds:data
+ 
+15 : met2:
+ 
+16 : Adc ax , [ebx+eax+6]
+ 
+17 : Neg bh
+ 
+18 : Neg ebx
+ 
+19 : Dec ax
+ 
+20 : Adc ecx , [ebx+si+6]
+ 
+21 : Adc bx , bina
+ 
+22 : Adc ecx , stri
+ 
+23 : Cmp bx , ah
+ 
+Error near line 23:Operand types must match on line 23
+
+24 : Cmp [ebx] , eax
+ 
+25 : Cmp deca , ah
+ 
+26 : Cmp bina , eax
+ 
+27 : met1:
+ 
+28 : Or [eax+0110b] , ebx
+ 
+29 : Or bh , bl
+ 
+30 : Or al , dh
+ 
+31 : Or cx , dx
+ 
+32 : Mov [bp+si+5] , bl
+ 
+33 : Mov [eax+3Ah] , bx
+ 
+34 : And [bx+di+5] , 8AF2h
+ 
+35 : And [ebx+6] , 8AF22E4Bh
+ 
+36 : Jc met1
+ 
+37 : And ecx , ebx
+ 
+38 : Jc near ptr met1
+ 
+39 : Jmp far ptr met3
+ 
+40 : cod1 ends
+ 
+41 : cod2 segment
+ 
+42 : assume cs:cod2 , ds:data
+ 
+43 : met3:
+ 
+44 : Mov [bp+di+5] , bl
+ 
+45 : Jmp far ptr met2
+ 
+46 : cod2 ends
+ 
+47 : END 
+Find 2 errors

@@ -1,0 +1,124 @@
+Microsoft (R) Macro Assembler Version 5.00                  6/26/17 12:19:47
+                                                             Page     1-1
+
+
+				.386 
+				mcrs MACRO  
+					And eax,ebx 
+				ENDM 
+				 
+				mcr MACRO parm 
+					And eax,ebx 
+				ENDM 
+				 
+ 0000				data segment 
+ 0000  62 69 67 20 75 6B 72		stri db "big ukrainian boss's string" 
+       61 69 6E 69 61 6E 20	
+       62 6F 73 73 27 73 20	
+       73 74 72 69 6E 67	
+ 001B  003E				hexa dw 3Eh 
+ 001D  6D000000				bina dd 01101101b 
+ 0021  15000000				deca dd 21 
+ 0025				data ends 
+				 
+ 0000				cod1 segment 
+				assume cs:cod1,ds:data 
+ 0000				met2: 
+ 0000  66| 13 4403 06		Adc ax,[ebx+eax+6] 
+ 0005  F6 DF			Neg bh 
+ 0007  F7 DB			Neg ebx 
+				 
+ 0009  66| 48			Dec ax 
+ 000B  13 4B 06			Adc ecx,[ebx+si+6] 
+				 
+ 000E  13 1D 0000001D R		Adc bx,bina 
+final.ASM(27): warning A4031: Operand types must match
+ 0014  13 0D 00000000 R		Adc ecx,stri 
+final.ASM(28): warning A4031: Operand types must match
+				 
+ 001A  3B DC			Cmp bx,ah 
+final.ASM(30): warning A4031: Operand types must match
+ 001C  39 03			Cmp [ebx],eax 
+				 
+ 001E  38 25 00000021 R		Cmp deca,ah 
+final.ASM(33): warning A4031: Operand types must match
+ 0024  39 05 0000001D R		Cmp bina,eax 
+ 002A				met1: 
+				 
+ 002A  09 58 06			Or [eax+0110b],ebx 
+ 002D  0A FB			Or bh,bl 
+ 002F  0A C6			Or al,dh 
+ 0031  66| 0B CA		Or cx,dx 
+				 
+ 0034  67| 88 5A 05		Mov [bp+si+5],bl 
+ 0038  66| 89 58 3A		Mov [eax+3Ah] ,bx 
+				 
+				 
+ 003C  67| 81 61 05 00008AF2	And [bx+di+5],8AF2h 
+ 0044  81 63 06 8AF22E4B	And [ebx+6],8AF22E4Bh 
+Microsoft (R) Macro Assembler Version 5.00                  6/26/17 12:19:47
+                                                             Page     1-2
+
+
+ 004B  72 DD			Jc met1 
+				 
+ 004D  23 CB			And ecx,ebx 
+				 
+ 004F  72 D9			Jc near ptr met1 
+ 0051  EA 00000000 ---- R	Jmp far ptr met3 
+ 0058				cod1 ends 
+				 
+ 0000				cod2 segment 
+				assume cs:cod2,ds:data 
+ 0000				met3: 
+ 0000  67| 88 5B 05		Mov [bp+di+5],bl 
+ 0004  EA 00000000 ---- R	Jmp far ptr met2 
+ 000B				cod2 ends 
+				END 
+
+Microsoft (R) Macro Assembler Version 5.00                  6/26/17 12:19:47
+                                                             Symbols-1
+
+
+Macros:
+
+		N a m e			Lines
+
+MCR  . . . . . . . . . . . . . .  	   1
+MCRS . . . . . . . . . . . . . .  	   1
+
+
+
+                N a m e         	Size	Length	 Align	Combine Class
+
+COD1 . . . . . . . . . . . . . .  	32 Bit	0058	PARA	NONE	
+COD2 . . . . . . . . . . . . . .  	32 Bit	000B	PARA	NONE	
+DATA . . . . . . . . . . . . . .  	32 Bit	0025	PARA	NONE	
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+BINA . . . . . . . . . . . . . .  	L DWORD	001D	DATA
+
+DECA . . . . . . . . . . . . . .  	L DWORD	0021	DATA
+
+HEXA . . . . . . . . . . . . . .  	L WORD	001B	DATA
+
+MET1 . . . . . . . . . . . . . .  	L NEAR	002A	COD1
+MET2 . . . . . . . . . . . . . .  	L NEAR	0000	COD1
+MET3 . . . . . . . . . . . . . .  	L NEAR	0000	COD2
+
+STRI . . . . . . . . . . . . . .  	L BYTE	0000	DATA
+
+@FILENAME  . . . . . . . . . . .  	TEXT  final		
+
+
+     62 Source  Lines
+     62 Total   Lines
+     14 Symbols
+
+  51100 + 465444 Bytes symbol space free
+
+      4 Warning Errors
+      0 Severe  Errors

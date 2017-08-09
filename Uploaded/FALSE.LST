@@ -1,0 +1,132 @@
+Microsoft (R) Macro Assembler Version 5.00                  6/26/17 12:22:10
+                                                             Page     1-1
+
+
+				.386 
+				mcrs MACRO 
+					And parm,dd 
+				ENDM 
+				 
+ 0000				data segment 
+ 0000  62 69 67 20 75 6B 72	str db "big ukrainian boss's string" 
+false.ASM(7): warning A4016: Reserved word used as symbol: STR
+       61 69 6E 69 61 6E 20	
+       62 6F 73 73 27 73 20	
+       73 74 72 69 6E 67	
+ 001B  003E			hex dw 3Eh 
+ 001D  6D000000			bina dd 01101101b 
+ 0021  15000000			deca dd 21 
+ 0025				data ends 
+ 0000				cod1 segment 
+				assume cs:cod1,ds:data 
+ 0000  F6 DF			Neg bh 
+ 0002  F7 DB			Neg ebx 
+				 
+ 0004  FF 0D 00000021 R		Dec deca 
+				 
+ 000A  12 7B 06			Adc bh, ptr [ebx+6] 
+false.ASM(19): error A2027: Operand expected
+ 000D  13 4B 06			Adc ecx,[ebx+6] 
+				 
+ 0010  12 3D 0000001D R		Adc bh,bina 
+false.ASM(22): warning A4031: Operand types must match
+ 0016  13 0D 00000000 U		Adc ecx,hexa 
+false.ASM(23): error A2009: Symbol not defined: HEXA
+				 
+ 001C  26: 38 63 06		Cmp es:[ebx+6],ah 
+ 0020  39 43 06			Cmp [ebx+6],eax 
+				 
+ 0023  38 25 00000021 R		Cmp deca,ah 
+false.ASM(28): warning A4031: Operand types must match
+ 0029  39 05 0000001D R		Cmp bina,eax 
+				 
+ 002F  0B C7			Or eax,bh 
+false.ASM(31): warning A4031: Operand types must match
+ 0031  0A FB			Or bh,bl 
+ 0033  0A C2			Or al,edx 
+false.ASM(33): warning A4031: Operand types must match
+ 0035  0B CA			Or ecx,edx 
+				 
+ 0037  8B C3			Mov eax,bl 
+false.ASM(36): warning A4031: Operand types must match
+ 0039  8B C3			Mov eax ,bx 
+false.ASM(37): warning A4031: Operand types must match
+ 003B  8B C3			Mov eax,ebx 
+ 003D  8A C3			Mov al,bl 
+ 003F  8A C3			Mov al,bx 
+false.ASM(40): warning A4031: Operand types must match
+ 0041  8A C3			Mov al,ebx 
+false.ASM(41): warning A4031: Operand types must match
+Microsoft (R) Macro Assembler Version 5.00                  6/26/17 12:22:10
+                                                             Page     1-2
+
+
+				 
+ 0043				met1: 
+				;And [bx+si],8Ah 
+ 0043  67| 81 61 05 00008AF2	And [bx+bp+di+5],8AF2h 
+false.ASM(45): error A2046: Multiple base registers
+ 004B  81 63 06 8AF22E4B	And [ebx+6],8AF22E4Bh 
+				 
+ 0052  20 3D 00000000 U		And hexa,bh 
+false.ASM(48): error A2009: Symbol not defined: HEXA
+ 0058  21 1D 0000001D R		And bina,bx 
+false.ASM(49): warning A4031: Operand types must match
+ 005E  21 1D 00000021 R		And deca,ebx 
+				 
+ 0064  72 DD			Jc met1 
+ 0066  E9 00000000 R		Jmp met2 
+false.ASM(53): error A2064: Near JMP/CALL to different CS
+ 006B				cod1 ends 
+				 
+ 0000				cod2 segment 
+				assume cs:cod2,ds:data 
+ 0000				met2: 
+ 0000				cod2 ends 
+				 
+				END 
+
+Microsoft (R) Macro Assembler Version 5.00                  6/26/17 12:22:10
+                                                             Symbols-1
+
+
+Macros:
+
+		N a m e			Lines
+
+MCRS . . . . . . . . . . . . . .  	   1
+
+
+
+                N a m e         	Size	Length	 Align	Combine Class
+
+COD1 . . . . . . . . . . . . . .  	32 Bit	006B	PARA	NONE	
+COD2 . . . . . . . . . . . . . .  	32 Bit	0000	PARA	NONE	
+DATA . . . . . . . . . . . . . .  	32 Bit	0025	PARA	NONE	
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+BINA . . . . . . . . . . . . . .  	L DWORD	001D	DATA
+
+DECA . . . . . . . . . . . . . .  	L DWORD	0021	DATA
+
+HEX  . . . . . . . . . . . . . .  	L WORD	001B	DATA
+
+MET1 . . . . . . . . . . . . . .  	L NEAR	0043	COD1
+MET2 . . . . . . . . . . . . . .  	L NEAR	0000	COD2
+
+STR  . . . . . . . . . . . . . .  	L BYTE	0000	DATA
+
+@FILENAME  . . . . . . . . . . .  	TEXT  false		
+
+
+     61 Source  Lines
+     61 Total   Lines
+     12 Symbols
+
+  51062 + 465482 Bytes symbol space free
+
+     10 Warning Errors
+      5 Severe  Errors
